@@ -1,18 +1,21 @@
-
-
 {
     auto_https off
 }
 
 :8080 {
 
-    @secondWebsite path /app /app/*
+    # Website 2
+    # yourdomain.com/app
+    # yourdomain.com/app/*
+    @website2 path /app /app/*
 
-    handle @secondWebsite {
+    handle @website2 {
         uri strip_prefix /app
         reverse_proxy testrepo1.railway.internal:8080
     }
 
+    # Website 1
+    # Everything else
     handle {
         reverse_proxy Zwebsite.railway.internal:8080
     }
