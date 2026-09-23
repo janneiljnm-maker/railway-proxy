@@ -3,10 +3,10 @@
 }
 
 :8080 {
-    @website2 path /about /about/*
+    @website2 path /canteen /canteen/*
 
     handle @website2 {
-        uri strip_prefix /about
+        uri strip_prefix /canteen
         reverse_proxy testrepo1.railway.internal:8080
     }
 
