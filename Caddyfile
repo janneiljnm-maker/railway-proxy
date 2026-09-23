@@ -3,13 +3,23 @@
 }
 
 :8080 {
-    @website2 path /canteen /canteen/*
+    # Website 3
+    @meSite path /about/me /about/me/*
 
-    handle @website2 {
-        uri strip_prefix /canteen
+    handle @meSite {
+        uri strip_prefix /about/me
+        reverse_proxy mesite.railway.internal:8080
+    }
+
+    # Website 2
+    @aboutSite path /about /about/*
+
+    handle @aboutSite {
+        uri strip_prefix /about
         reverse_proxy testrepo1.railway.internal:8080
     }
 
+    # Main website
     handle {
         reverse_proxy Zwebsite.railway.internal:8080
     }
