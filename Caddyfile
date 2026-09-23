@@ -5,3 +5,22 @@ COPY Caddyfile /etc/caddy/Caddyfile
 EXPOSE 8080
 
 CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+
+
+{
+    auto_https off
+}
+
+:8080 {
+
+    @secondWebsite path /app /app/*
+
+    handle @secondWebsite {
+        uri strip_prefix /app
+        reverse_proxy testrepo1.railway.internal:8080
+    }
+
+    handle {
+        reverse_proxy Zwebsite.railway.internal:8080
+    }
+}
