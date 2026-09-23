@@ -3,19 +3,13 @@
 }
 
 :8080 {
-
-    # Website 2
-    # yourdomain.com/app
-    # yourdomain.com/app/*
-    @website2 path /app /app/*
+    @website2 path /about /about/*
 
     handle @website2 {
-        uri strip_prefix /app
+        uri strip_prefix /about
         reverse_proxy testrepo1.railway.internal:8080
     }
 
-    # Website 1
-    # Everything else
     handle {
         reverse_proxy Zwebsite.railway.internal:8080
     }
